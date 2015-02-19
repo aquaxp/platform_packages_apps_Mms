@@ -83,6 +83,8 @@ import com.google.android.mms.pdu.MultimediaMessagePdu;
 import com.google.android.mms.pdu.PduHeaders;
 import com.google.android.mms.pdu.PduPersister;
 
+import com.android.mms.transaction.MarkReadReceiver;
+
 /**
  * This class is used to update the notification indicator. It will check whether
  * there are unread messages. If yes, it would show the notification indicator,
@@ -960,6 +962,25 @@ public class MessagingNotification {
                 sNotificationOnDeleteIntent, 0));
 
         final Notification notification;
+
+        if (messageCount == 1 || uniqueThreadCount == 1) {
+          // Add the 'Mark as read' action
+          CharSequence markReadText = context.getText(R.string.notification_mark_read);
+          Intent mrIntent = new Intent();
+          mrIntent.setClass(context, MarkReadReceiver.class);
+          mrIntent.putExtra(MarkReadReceiver.SMS_THREAD_ID, mostRecentNotification.mThreadId);
+          PendingIntent mrPendingIntent = PendingIntent.getBroadcast(context, 0, mrIntent,
+                  PendingIntent.FLAG_UPDATE_CURRENT);
+          noti.addAction(R.drawable.ic_mark_read_dark, markReadText, mrPendingIntent);
+
+          // Add the Call action
+          CharSequence callText = context.getText(R.string.menu_call);
+          Intent callIntent = new Intent(Intent.ACTION_CALL);
+          callIntent.setData(mostRecentNotification.mSender.getPhoneUri());
+          PendingIntent callPendingIntent = PendingIntent.getActivity(context, 0, callIntent,
+                  PendingIntent.FLAG_UPDATE_CURRENT);
+          noti.addAction(R.drawable.ic_menu_call_dark, callText, callPendingIntent);
+        }
 
         if (messageCount == 1) {
             // We've got a single message

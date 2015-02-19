@@ -114,7 +114,7 @@
     <!-- Menu item in slideshow edit screen for moving the selected slide down in the order -->
     <string name="move_down">Move down</string>
     <!-- Menu item in slideshow edit screen for removing the selected slide from the slideshow -->
-    <string name="remove_slide">Remove slide</string> 
+    <string name="remove_slide">Remove slide</string>
     <!-- Menu item in slideshow edit screen for adding a new slide to the slideshow -->
     <string name="add_slide">Add slide</string>
     <!-- Text displayed below "Add slide" item in slideshow edit screen -->
@@ -800,5 +800,8 @@
     <string name="banner_sms_promo_title_initial">Messaging is not your SMS app</string>
     <string name="banner_sms_promo_title_application"><xliff:g id="appName">%s</xliff:g> is your SMS app</string>
     <string name="banner_sms_promo_message">You can change this in Settings</string>
+
+    <!-- Notification addons -->
+    <string name="notification_mark_read">Read</string>
 
 </resources>
