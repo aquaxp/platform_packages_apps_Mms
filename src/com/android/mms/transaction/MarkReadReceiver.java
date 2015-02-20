@@ -48,7 +48,7 @@ public class MarkReadReceiver extends BroadcastReceiver {
             Conversation con = Conversation.get(context, threadId, true);
             if (con != null) {
                 // Mark thread as read
-                con.markAsRead();
+                con.markAsRead(false);
 
                 // Dismiss the notification that brought us here.
                 NotificationManager notificationManager =
